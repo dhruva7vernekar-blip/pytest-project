@@ -1,21 +1,25 @@
-import sys
+def calculate_final_amount(bill, member):
+    member = member.lower()
+    discount = 0
 
-# Read arguments
-total_cart_value = float(sys.argv[1])
-membership = sys.argv[2].lower()
-extra = float(sys.argv[3])  # if needed
+    if member == "gold":
+        discount = 0.20
+    elif member == "silver":
+        discount = 0.10 if bill > 1000 else 0.05
+    elif member == "regular":
+        discount = 0.05 if bill > 2000 else 0
 
-discount = 0
+    discounted_amount = bill - (bill * discount)
+    gst = discounted_amount * 0.18
+    final_amount = discounted_amount + gst
 
-if membership == "gold":
-    discount = 0.20
-elif membership == "silver":
-    discount = 0.10 if total_cart_value > 1000 else 0.05
-elif membership == "regular":
-    discount = 0.05 if total_cart_value > 2000 else 0
+    return round(final_amount, 2)
 
-final_amount = total_cart_value - (total_cart_value * discount)
-tax = final_amount * 0.18
-final_bill = final_amount + tax
 
-print(f"Final Bill Amount: {final_bill}")
+# 👇 Only runs when executed directly, NOT during pytest import
+if __name__ == "__main__":
+    bill = float(input("Enter total cart value: "))
+    member = input("Enter membership type (Gold/Silver/Regular): ")
+
+    result = calculate_final_amount(bill, member)
+    print("Final payable amount:", result)
