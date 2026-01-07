@@ -14,8 +14,8 @@ def test_silver_member_below_1000():
     assert calculate_final_amount(800, "Silver") == 896.8
 
 def test_regular_member_above_2000():
-    # 5% discount
-    assert calculate_final_amount(2500, "Regular") == 2807.5
+    assert calculate_final_amount(2500, "Regular") == 2802.5
+
 
 def test_regular_member_below_2000():
     # No discount
